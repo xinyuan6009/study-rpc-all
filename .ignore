@@ -1,0 +1,23 @@
+# IDEA
+.idea/
+*.iml
+out/
+gen/
+idea-gitignore.jar
+resources/templates.list
+resources/gitignore/*
+
+#Build
+build/
+build.properties
+junit*.properties
+IgnoreLexer.java~
+.gradle
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar

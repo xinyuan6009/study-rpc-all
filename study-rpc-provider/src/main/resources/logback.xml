@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scanPeriod="60 seconds" debug="false">
+
+	<!-- 日志目录 v1.0-->
+	<property name="basePath" value="/Users/xinyuan6009/workspace/logs/study" />
+
+	<appender name="error"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${basePath}/server-error.log</File>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd.HH:mm:ss.SSS} [%5p] %c{50} %3L %M %m%n
+			</pattern>
+		</encoder>
+
+		<!-- 只输出debug级别的日志 -->
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${basePath}/server-error.log.%d{yyyy-MM-dd}
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+	</appender>
+	
+	
+	<appender name="debug"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${basePath}/server-debug.log</File>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd.HH:mm:ss.SSS} [%5p] %c{50} %3L %M %m%n
+			</pattern>
+		</encoder>
+
+		<!-- 只输出debug级别的日志 -->
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${basePath}/server-debug.log.%d{yyyy-MM-dd}
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="info"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${basePath}/server-info.log</File>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd.HH:mm:ss.SSS} [%5p] %c{50} %3L %M %m%n
+			</pattern>
+		</encoder>
+		<!-- 只输出info级别的日志 -->
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${basePath}/server-info.log.%d{yyyy-MM-dd}
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="warn"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${basePath}/server-warn.log</File>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd.HH:mm:ss.SSS} [%5p] %c{50} %3L %M %m%n
+			</pattern>
+		</encoder>
+
+		<!-- 只输出level级别以上的日志 -->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>warn</level>
+		</filter>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${basePath}/server-warn.log.%d{yyyy-MM-dd}
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+    <!-- PV日志统计 -->
+    <appender name="pv-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${basePath}/server-pv.log</File>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd.HH:mm:ss.SSS} [%5p] %c{50} %3L %M %m%n
+            </pattern>
+        </encoder>
+
+        <!-- 只输出level级别以上的日志 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>info</level>
+        </filter>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${basePath}/server-pv.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd.HH:mm:ss.SSS} [%5p] %c{50} %3L %M %m%n
+			</pattern>
+		</encoder>
+	</appender>
+
+    <!-- PV looger -->
+    <logger name="pv" level="info">
+        <appender-ref ref="pv-appender"/>
+    </logger>
+
+	<logger name="com.xinyuan" level="debug" >
+    	<appender-ref ref="info"/>  
+    	<appender-ref ref="debug"/>  
+    	<appender-ref ref="warn"/>  
+    	<appender-ref ref="stdout"/>  
+  	</logger> 
+	
+	<root level="info">
+	</root>
+</configuration>
+

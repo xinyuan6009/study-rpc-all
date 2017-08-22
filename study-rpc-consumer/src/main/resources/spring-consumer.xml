@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-lazy-init="true">
+    <description>thrift配置文件 </description>
+
+
+    <!-- 服务端注册 -->
+    <bean id="app" class="com.bjsxt.study.ClientBootstrap">
+        <property name="serv_port" value="7009" />
+        <property name="helloRpcServiceImpl" ref="helloRpcServiceImpl" />
+    </bean>
+</beans>
